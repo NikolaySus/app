@@ -1,5 +1,5 @@
 """
-Module with control class DeleteEvaluation implementation.
+Модуль с реализацией управляющего класса DeleteEvaluation.
 """
 from control.run_evaluation import RunEvaluation
 from persistence.eval_gateway import EvalGateway
@@ -7,11 +7,11 @@ from persistence.eval_gateway import EvalGateway
 
 class DeleteEvaluation:
     """
-    Control class.
+    Управляющий класс.
     """
     def delete_eval(self, eval_id: int):
         """
-        Select evaluation by eval_id, may be running.
+        Выбор оценки по идентификатору, может выполняться.
         """
         try:
             RunEvaluation.stop_eval(eval_id)

@@ -1,12 +1,12 @@
 """
-Module with domain class Evaluation implementation.
+Модуль с реализацией доменного класса Evaluation.
 """
 from datetime import datetime
 
 
 class Evaluation:
     """
-    Domain class.
+    Доменный класс.
     """
     def __init__(
         self,
@@ -27,19 +27,19 @@ class Evaluation:
 
     def set_id(self, eval_id):
         """
-        Setter for eval_id.
+        Установщик для идентификатора оценки.
         """
         self.eval_id = eval_id
 
     def set_name(self, name: str):
         """
-        Setter for eval_name.
+        Установщик для имени оценки.
         """
         self.eval_name = name
 
     def start_eval(self):
         """
-        Domain logic for evaluation start.
+        Доменная логика для начала оценки.
         """
         self.eval_state = "RUNNING"
         self.eval_start_timestamp = datetime.now().isoformat()
@@ -47,13 +47,13 @@ class Evaluation:
 
     def append_results(self, delta):
         """
-        Domain logic for evaluation results increment.
+        Доменная логика для увеличения результатов оценки.
         """
         self.eval_results += delta
 
     def stop_eval(self, results: str = None):
         """
-        Domain logic for evaluation stop.
+        Доменная логика для остановки оценки.
         """
         self.eval_state = "FINISHED"
         self.eval_finish_timestamp = datetime.now().isoformat()
@@ -62,8 +62,7 @@ class Evaluation:
 
     def get_state_timestamps(self):
         """
-        Getter for eval_state, eval_start_timestamp and
-        eval_finish_timestamp retrieval.
+        Получение состояния, времени начала и времени окончания оценки.
         """
         return {
             "state": self.eval_state,
@@ -73,36 +72,36 @@ class Evaluation:
 
     def get_eval_id(self):
         """
-        Getter for eval_id retrieval.
+        Получение идентификатора оценки.
         """
         return self.eval_id
 
     def get_eval_name(self):
         """
-        Getter for eval_name retrieval.
+        Получение имени оценки.
         """
         return self.eval_name
 
     def get_eval_start_timestamp(self):
         """
-        Getter for eval_start_timestamp retrieval.
+        Получение времени начала оценки.
         """
         return self.eval_start_timestamp
 
     def get_eval_finish_timestamp(self):
         """
-        Getter for eval_finish_timestamp retrieval.
+        Получение времени окончания оценки.
         """
         return self.eval_finish_timestamp
 
     def get_eval_state(self):
         """
-        Getter for eval_state retrieval.
+        Получение состояния оценки.
         """
         return self.eval_state
 
     def get_eval_results(self):
         """
-        Getter for eval_results retrieval.
+        Получение результатов оценки.
         """
         return self.eval_results

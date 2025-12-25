@@ -1,5 +1,5 @@
 """
-Module with control class CreateEvaluation implementation.
+Модуль с реализацией управляющего класса CreateEvaluation.
 """
 import re
 from domain.evaluation import Evaluation
@@ -9,11 +9,11 @@ from persistence.eval_finder import EvalFinder
 
 class CreateEvaluation:
     """
-    Control class.
+    Управляющий класс.
     """
     def check_eval_name_input(self, eval_name: str):
         """
-        Name validation.
+        Проверка корректности имени.
         """
         if not eval_name:
             raise ValueError("Evaluation name cannot be empty")
@@ -21,22 +21,22 @@ class CreateEvaluation:
         if len(eval_name) < 3:
             raise ValueError("Evaluation name must be at least 3 characters")
 
-        # Allow only safe, simple characters
+        # Разрешены только безопасные, простые символы
         if not re.match(r"^[A-Za-z0-9_\- ]+$", eval_name):
             raise ValueError(
                 "Evaluation name contains invalid characters"
             )
 
-        # Optional but very good: uniqueness check
+        # Опционально, но очень хорошо: проверка уникальности
         finder = EvalFinder()
         if finder.find_eval_by_name(eval_name):
             raise ValueError("Evaluation name already exists")
 
     def create_eval(self, eval_name: str):
         """
-        Evaluation creation.
+        Создание оценки.
         """
-        # Application-level validation
+        # Валидация на уровне приложения
         self.check_eval_name_input(eval_name)
 
         evaluation = Evaluation(eval_name=eval_name)

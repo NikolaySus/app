@@ -1,19 +1,19 @@
 """
-Module with control class GetEvaluationReport implementation.
+Модуль с реализацией управляющего класса GetEvaluationReport.
 """
 class GetEvaluationReport:
     """
-    Control class.
+    Управляющий класс.
     """
     def get_eval_report(self, evaluation):
         """
-        Get evaluation results.
+        Получение результатов оценки.
         """
         return evaluation.get_eval_results()
 
     def export_eval_report_to_file(self, evaluation, filename: str):
         """
-        Write evaluation results to file.
+        Запись результатов оценки в файл.
         """
         with open(filename, "w", encoding="utf-8") as f:
             f.write(evaluation.get_eval_results() or "")

@@ -1,12 +1,12 @@
 """
-Module with gateway class EvalGateway implementation.
+Модуль с реализацией шлюзового класса EvalGateway.
 """
 from database.db import get_connection
 
 
 class EvalGateway:
     """
-    Gateway class.
+    Шлюзовой класс.
     """
     def __init__(
         self,
@@ -26,79 +26,79 @@ class EvalGateway:
 
     def get_id(self):
         """
-        Getter for _eval_id retrieval.
+        Получение идентификатора оценки.
         """
         return self._eval_id
 
     def get_name(self):
         """
-        Getter for _eval_name retrieval.
+        Получение имени оценки.
         """
         return self._eval_name
 
     def get_start_timestamp(self):
         """
-        Getter for _eval_start_timestamp retrieval.
+        Получение времени начала оценки.
         """
         return self._eval_start_timestamp
 
     def get_finish_timestamp(self):
         """
-        Getter for _eval_finish_timestamp retrieval.
+        Получение времени окончания оценки.
         """
         return self._eval_finish_timestamp
 
     def get_state(self):
         """
-        Getter for _eval_state retrieval.
+        Получение состояния оценки.
         """
         return self._eval_state
 
     def get_results(self):
         """
-        Getter for _eval_results retrieval.
+        Получение результатов оценки.
         """
         return self._eval_results
 
     def set_id(self, eval_id):
         """
-        Setter for _eval_id.
+        Установщик для идентификатора оценки.
         """
         self._eval_id = eval_id
 
     def set_name(self, name):
         """
-        Setter for _eval_name.
+        Установщик для имени оценки.
         """
         self._eval_name = name
 
     def set_start_timestamp(self, ts):
         """
-        Setter for _eval_start_timestamp.
+        Установщик для времени начала оценки.
         """
         self._eval_start_timestamp = ts
 
     def set_finish_timestamp(self, ts):
         """
-        Setter for _eval_finish_timestamp.
+        Установщик для времени окончания оценки.
         """
         self._eval_finish_timestamp = ts
 
     def set_state(self, state):
         """
-        Setter for _eval_state.
+        Установщик для состояния оценки.
         """
         self._eval_state = state
 
     def set_results(self, results):
         """
-        Setter for _eval_results.
+        Установщик для результатов оценки.
         """
         self._eval_results = results
 
     def insert(self):
         """
-        Row data gateway insert for database.
+        Вставка данных через шлюз в базу данных.
         """
         conn = get_connection()
         cursor = conn.cursor()
@@ -125,7 +125,7 @@ class EvalGateway:
 
     def update(self):
         """
-        Row data gateway update for database.
+        Обновление данных через шлюз в базе данных.
         """
         conn = get_connection()
         cursor = conn.cursor()
@@ -152,7 +152,7 @@ class EvalGateway:
 
     def delete(self):
         """
-        Row data gateway delete for database.
+        Удаление данных через шлюз из базы данных.
         """
         conn = get_connection()
         cursor = conn.cursor()

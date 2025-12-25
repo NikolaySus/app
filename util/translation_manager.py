@@ -1,12 +1,12 @@
 """
-Module for TranslationManager.
+Модуль для TranslationManager.
 """
 from util.singleton import Singleton
 
 
 class TranslationManager(metaclass=Singleton):
     """
-    Simple translation manager that provides translation strings.
+    Простой менеджер переводов, предоставляющий строки перевода.
     """
     _translations = {
         "en": {
@@ -49,7 +49,7 @@ class TranslationManager(metaclass=Singleton):
 
     @classmethod
     def switch_language(cls, lang_name: str):
-        """Switch language based on language name."""
+        """Переключение языка на основе названия языка."""
         if lang_name == "English":
             cls._current_lang = "en"
         elif lang_name == "Русский":
@@ -57,5 +57,5 @@ class TranslationManager(metaclass=Singleton):
 
     @classmethod
     def tr(cls, key: str) -> str:
-        """Get translation for given key."""
+        """Получение перевода для данного ключа."""
         return cls._translations[cls._current_lang].get(key, key)

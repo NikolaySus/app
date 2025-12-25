@@ -1,5 +1,5 @@
 """
-Module with control class RunEvaluation implementation.
+Модуль с реализацией управляющего класса RunEvaluation.
 """
 import threading
 import time
@@ -11,14 +11,14 @@ from util.singleton import Singleton
 
 class RunEvaluation(metaclass=Singleton):
     """
-    Control class.
+    Управляющий класс.
     """
     _running_evaluations = dict()
 
     @classmethod
     def run_eval(cls, evaluation: Evaluation):
         """
-        Run evaluation.
+        Запуск оценки.
         """
         eval_id = evaluation.get_eval_id()
         assert eval_id not in cls._running_evaluations, "Already running"
@@ -32,7 +32,7 @@ class RunEvaluation(metaclass=Singleton):
     @classmethod
     def _run_eval_async(cls, eval_id: int):
         """
-        Run the evaluation asynchronously for 5 seconds.
+        Асинхронное выполнение оценки в течение 5 секунд.
         """
         pair = cls._running_evaluations[eval_id]
         evaluation = pair[0]
@@ -57,13 +57,13 @@ class RunEvaluation(metaclass=Singleton):
     @classmethod
     def get_running_evaluation_by_id(cls, eval_id: int):
         """
-        Get evaluation if it is running.
+        Получение оценки, если она выполняется.
         """
         return cls._running_evaluations[eval_id][0]
 
     @classmethod
     def stop_eval(cls, eval_id: int):
         """
-        Stop evaluation if it is running.
+        Остановка оценки, если она выполняется.
         """
         cls._running_evaluations[eval_id][1].set()

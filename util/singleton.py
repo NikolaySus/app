@@ -1,10 +1,10 @@
 """
-Module with Singleton metaclass implementation.
+Модуль с реализацией метакласса Singleton.
 """
 class Singleton(type):
     """
-    Singleton metaclass implementation.
-    See https://stackoverflow.com/a/6798042
+    Реализация метакласса Singleton.
+    См. https://stackoverflow.com/a/6798042
     """
     _instances = {}
 

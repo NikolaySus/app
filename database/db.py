@@ -1,5 +1,5 @@
 """
-Module with database access functions implementations.
+Модуль с реализацией функций доступа к базе данных.
 """
 import sqlite3
 
@@ -8,7 +8,7 @@ DB_NAME = "evaluation.db"
 
 def get_connection():
     """
-    Returns connection.
+    Возвращает соединение с базой данных.
     """
     conn = sqlite3.connect(DB_NAME)
     conn.row_factory = sqlite3.Row
@@ -17,7 +17,7 @@ def get_connection():
 
 def init_db():
     """
-    Initializes database.
+    Инициализация базы данных.
     """
     conn = get_connection()
     cursor = conn.cursor()
@@ -37,5 +37,5 @@ def init_db():
     conn.close()
 
 
-# Initialize DB on import (acceptable for prototype)
+# Инициализация БД при импорте (допустимо для прототипа)
 init_db()

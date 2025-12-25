@@ -1,5 +1,5 @@
 """
-Module with control class SelectEvaluation implementation.
+Модуль с реализацией управляющего класса SelectEvaluation.
 """
 from control.run_evaluation import RunEvaluation
 from persistence.eval_finder import EvalFinder
@@ -7,18 +7,18 @@ from persistence.eval_finder import EvalFinder
 
 class SelectEvaluation:
     """
-    Control class.
+    Управляющий класс.
     """
     def select_eval_by_name(self, eval_name: str):
         """
-        Select evaluations by names starting with eval_name prefix.
+        Выбор оценок по именам, начинающимся с префикса eval_name.
         """
         finder = EvalFinder()
         return finder.find_eval_by_name(eval_name)
 
     def select_eval_by_id(self, eval_id: int):
         """
-        Select evaluation by eval_id, may be running.
+        Выбор оценки по идентификатору, может выполняться.
         """
         try:
             return RunEvaluation.get_running_evaluation_by_id(eval_id)

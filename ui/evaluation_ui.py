@@ -1,5 +1,5 @@
 """
-Module with boundary class EvaluationUI implementation.
+Модуль с реализацией граничного класса EvaluationUI.
 """
 from PyQt6.QtWidgets import (
     QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLabel, QSlider,
@@ -16,11 +16,11 @@ from util.translation_manager import TranslationManager
 
 class EvaluationUI(QWidget):
     """
-    Boundary class.
+    Граничный класс.
     """
     def __init__(self):
         super().__init__()
-        # Left side: search + list
+        # Левая сторона: поиск + список
         self.search_input = QLineEdit()
 
         self.eval_list = QListWidget()
@@ -29,7 +29,7 @@ class EvaluationUI(QWidget):
         left_layout.addWidget(self.search_input)
         left_layout.addWidget(self.eval_list)
 
-        # Right side: details / actions
+        # Правая сторона: детали / действия
         self.name_input = QLineEdit()
         self.name_input.setDisabled(False)
         self.result_box = QTextEdit()
@@ -59,12 +59,12 @@ class EvaluationUI(QWidget):
         right_layout.addWidget(self.stop_btn)
         right_layout.addWidget(self.delete_btn)
 
-        # Main layout
+        # Основной макет
         main_layout = QHBoxLayout()
         main_layout.addLayout(left_layout, stretch=1)
         main_layout.addLayout(right_layout, stretch=4)
 
-        # Final main layout
+        # Итоговый основной макет
         final_main_layout = QVBoxLayout()
         final_main_layout.addLayout(main_layout)
         ui_settings_layout = QHBoxLayout()
@@ -72,7 +72,7 @@ class EvaluationUI(QWidget):
         self.lang_box.addItems(["English", "Русский"])
         self.ui_scaler = QSlider(Qt.Orientation.Horizontal, self)
 
-        # Create labels for each tick value
+        # Создание меток для каждого значения деления
         max_val = 275
         tick_interval = 25
         self.min_val = tick_interval
@@ -92,10 +92,10 @@ class EvaluationUI(QWidget):
         slider_container_layout.setContentsMargins(0, 0, 0, 0)
         slider_container_layout.setSpacing(2)
 
-        # Add slider
+        # Добавление ползунка
         slider_container_layout.addWidget(self.ui_scaler)
 
-        # Create labels for tick marks
+        # Создание меток для делений
         self.tick_labels = {}
         tick_labels_layout = QHBoxLayout()
         tick_labels_layout.setContentsMargins(0, 0, 0, 0)
@@ -114,13 +114,13 @@ class EvaluationUI(QWidget):
             # Add the label
             tick_labels_layout.addWidget(label)
 
-            # Add stretch between labels (except after the last one)
+        # Добавление растяжения между метками (кроме последней)
             if i < len(tick_values) - 1:
                 # Add stretch to create even spacing between labels
                 # Use stretch factor 2 for more even distribution
                 tick_labels_layout.addStretch(1)
 
-        # Add a small final stretch to account for slider handle margin
+        # Добавление небольшого растяжения для учета отступа ползунка
         tick_labels_layout.addStretch(0)
 
         self.ui_settings_label = QLabel()
@@ -164,9 +164,9 @@ class EvaluationUI(QWidget):
 
     def eventFilter(self, obj: QObject, event: QEvent) -> bool:
         """
-        Utility.
-        Deselects item in self.eval_list if user clicked empty area of it
-        or on search input.
+        Утилита.
+        Снимает выделение с элемента в self.eval_list, если пользователь
+        кликнул на пустую область или на поле поиска.
         """
         if (obj == self.eval_list.viewport() and
             event.type() == QEvent.Type.MouseButtonPress):
@@ -189,7 +189,7 @@ class EvaluationUI(QWidget):
 
     def create_eval(self):
         """
-        Create evaluation.
+        Создание оценки.
         """
         name = self.name_input.text()
         controller = CreateEvaluation()
@@ -206,15 +206,15 @@ class EvaluationUI(QWidget):
 
     def run_eval(self):
         """
-        Run evaluation.
+        Запуск оценки.
         """
         if not self.current_eval:
             return
-        self.polling_enabled = False  # Pause polling during operation
+            self.polling_enabled = False  # Приостановка опроса во время операции
         try:
             RunEvaluation.run_eval(self.current_eval)
         except AssertionError:
-            self.polling_enabled = True  # Resume polling
+            self.polling_enabled = True  # Возобновление опроса
             return
         state_info = self.current_eval.get_state_timestamps()
         self.state_label.setText(f"{state_info['state']}")
@@ -222,7 +222,7 @@ class EvaluationUI(QWidget):
 
     def stop_eval(self):
         """
-        Stop evaluation.
+        Остановка оценки.
         """
         if not self.current_eval:
             return
@@ -237,12 +237,12 @@ class EvaluationUI(QWidget):
 
     def delete_eval(self):
         """
-        Delete evaluation.
+        Удаление оценки.
         """
         if not self.current_eval:
             return
 
-        self.polling_enabled = False  # Pause polling during deletion
+        self.polling_enabled = False  # Приостановка опроса во время удаления
         controller = DeleteEvaluation()
         controller.delete_eval(self.current_eval.eval_id)
 
@@ -254,11 +254,11 @@ class EvaluationUI(QWidget):
         self.eval_list.clear()
 
         self.update_eval_list()
-        self.polling_enabled = True  # Resume polling
+        self.polling_enabled = True  # Возобновление опроса
 
     def update_eval_list(self):
         """
-        Utility.
+        Утилита.
         """
         prefix = self.search_input.text()
         controller = SelectEvaluation()
@@ -272,10 +272,10 @@ class EvaluationUI(QWidget):
 
     def select_eval(self, item=None):
         """
-        Select evaluation.
+        Выбор оценки.
         """
         if not self.polling_enabled and item is None:
-            return  # Skip polling while operations are in progress
+            return  # Пропустить опрос во время выполнения операций
 
         if item is None and not self.current_eval:
             return
@@ -298,7 +298,7 @@ class EvaluationUI(QWidget):
 
     def on_list_clicked(self, event):
         """
-        Utility.
+        Утилита.
         """
         item = self.eval_list.itemAt(event.pos())
 
@@ -312,7 +312,7 @@ class EvaluationUI(QWidget):
 
     def clear_current_evaluation(self):
         """
-        Utility.
+        Утилита.
         """
         self.current_eval = None
         self.name_input.clear()
@@ -321,7 +321,7 @@ class EvaluationUI(QWidget):
         self.state_label.setText(TranslationManager.tr("state_label"))
 
     def _update_ui_texts(self):
-        """Update all UI texts when language changes."""
+        """Обновление всех текстов интерфейса при смене языка."""
         TranslationManager.switch_language(self.lang_box.currentText())
         self.setWindowTitle(TranslationManager.tr("window_title"))
         self.search_input.setPlaceholderText(
@@ -339,8 +339,8 @@ class EvaluationUI(QWidget):
 
     def _select_eval_in_list(self, eval_id: int):
         """
-        Utility.
-        Select an evaluation in the list widget by its ID.
+        Утилита.
+        Выбор оценки в виджете списка по её идентификатору.
         """
         for i in range(self.eval_list.count()):
             item = self.eval_list.item(i)
@@ -352,13 +352,13 @@ class EvaluationUI(QWidget):
 
     def _update_tick_label_highlight(self, value: int):
         """
-        Update the highlighting of tick labels based on current slider value.
-        Highlights the label corresponding to the current or nearest tick value.
+        Обновление подсветки меток делений в зависимости от текущего значения ползунка.
+        Подсвечивает метку, соответствующую текущему или ближайшему значению деления.
         """
-        # Reset all labels to default style
+        # Сброс всех меток к стилю по умолчанию
         for _, label in self.tick_labels.items():
             label.setStyleSheet("")  # Reset to default
-            # Reset font weight if needed
+        # Сброс жирности шрифта при необходимости
             font = label.font()
             font.setBold(False)
             label.setFont(font)
@@ -369,7 +369,7 @@ class EvaluationUI(QWidget):
         if tick_interval <= 0:
             return
 
-        # Calculate nearest tick value
+        # Вычисление ближайшего значения деления
         remainder = (value - self.min_val) % tick_interval
         if remainder <= tick_interval // 2:
             nearest_tick = value - remainder
@@ -380,7 +380,7 @@ class EvaluationUI(QWidget):
         nearest_tick = max(self.min_val,
                            min(nearest_tick, self.ui_scaler.maximum()))
 
-        # Highlight the label for the nearest tick
+        # Подсветка метки для ближайшего деления
         if nearest_tick in self.tick_labels:
             label = self.tick_labels[nearest_tick]
             # Apply highlight style
@@ -392,15 +392,15 @@ class EvaluationUI(QWidget):
 
     def _snap_to_tick(self):
         """
-        Snap the slider to the nearest tick when released.
-        This makes the slider stick to ticks.
+        Привязка ползунка к ближайшему делению при отпускании.
+        Это заставляет ползунок фиксироваться на делениях.
         """
         value = self.ui_scaler.value()
         tick_interval = self.ui_scaler.tickInterval()
         if tick_interval <= 0:
             return
 
-        # Calculate nearest tick value
+        # Вычисление ближайшего значения деления
         self.min_val = self.ui_scaler.minimum()
         remainder = (value - self.min_val) % tick_interval
         if remainder <= tick_interval // 2:
@@ -420,8 +420,8 @@ class EvaluationUI(QWidget):
 
     def set_scale(self, value: int):
         """
-        Set the UI scale based on slider value.
-        Value is percentage (25-325).
+        Установка масштаба интерфейса на основе значения ползунка.
+        Значение в процентах (25-325).
         """
         value = self._snap_to_tick()
         # Convert slider value to scale factor (1.0 = 100%)
@@ -429,16 +429,16 @@ class EvaluationUI(QWidget):
         self.scale_factor = value / 100.0
         wtf = self.scale_factor / wtf
 
-        # Get the application font
+        # Получение шрифта приложения
         app = QApplication.instance()
         if app:
             font = app.font()
-            # Scale the font size
+        # Масштабирование размера шрифта
             base_font_size = 9  # Base font size in points
             scaled_font_size = int(base_font_size * self.scale_factor)
             font.setPointSize(scaled_font_size)
 
-            # Apply font to all widgets
+        # Применение шрифта ко всем виджетам
             app.setFont(font)
 
             # Also adjust some widget minimum sizes based on scale
@@ -446,9 +446,9 @@ class EvaluationUI(QWidget):
 
     def _adjust_widget_sizes(self, wtf):
         """
-        Adjust minimum sizes of widgets based on scale factor.
+        Корректировка минимальных размеров виджетов на основе коэффициента масштаба.
         """
-        # Adjust minimum heights for buttons and input fields
+        # Корректировка минимальной высоты для кнопок и полей ввода
         min_height = int(25 * self.scale_factor)
 
         widgets_to_adjust = [

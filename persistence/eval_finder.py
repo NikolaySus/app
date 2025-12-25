@@ -1,5 +1,5 @@
 """
-Module with finder class EvalFinder implementation.
+Модуль с реализацией класса поиска EvalFinder.
 """
 from database.db import get_connection
 from domain.evaluation import Evaluation
@@ -7,11 +7,11 @@ from domain.evaluation import Evaluation
 
 class EvalFinder:
     """
-    Finder class.
+    Класс поиска.
     """
     def find_eval(self, eval_id: int):
         """
-        Search by id for UI select.
+        Поиск по идентификатору для выбора в интерфейсе.
         """
         conn = get_connection()
         cursor = conn.cursor()
@@ -26,7 +26,7 @@ class EvalFinder:
 
     def find_eval_by_name(self, eval_name: str):
         """
-        Prefix search for UI list.
+        Поиск по префиксу для списка в интерфейсе.
         """
         conn = get_connection()
         cursor = conn.cursor()
