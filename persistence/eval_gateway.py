@@ -24,46 +24,82 @@ class EvalGateway:
         self._eval_state = eval_state
         self._eval_results = eval_results
 
-    # --- getters ---
     def get_id(self):
+        """
+        Getter for _eval_id retrieval.
+        """
         return self._eval_id
 
     def get_name(self):
+        """
+        Getter for _eval_name retrieval.
+        """
         return self._eval_name
 
     def get_start_timestamp(self):
+        """
+        Getter for _eval_start_timestamp retrieval.
+        """
         return self._eval_start_timestamp
 
     def get_finish_timestamp(self):
+        """
+        Getter for _eval_finish_timestamp retrieval.
+        """
         return self._eval_finish_timestamp
 
     def get_state(self):
+        """
+        Getter for _eval_state retrieval.
+        """
         return self._eval_state
 
     def get_results(self):
+        """
+        Getter for _eval_results retrieval.
+        """
         return self._eval_results
 
-    # --- setters ---
     def set_id(self, eval_id):
+        """
+        Setter for _eval_id.
+        """
         self._eval_id = eval_id
 
     def set_name(self, name):
+        """
+        Setter for _eval_name.
+        """
         self._eval_name = name
 
     def set_start_timestamp(self, ts):
+        """
+        Setter for _eval_start_timestamp.
+        """
         self._eval_start_timestamp = ts
 
     def set_finish_timestamp(self, ts):
+        """
+        Setter for _eval_finish_timestamp.
+        """
         self._eval_finish_timestamp = ts
 
     def set_state(self, state):
+        """
+        Setter for _eval_state.
+        """
         self._eval_state = state
 
     def set_results(self, results):
+        """
+        Setter for _eval_results.
+        """
         self._eval_results = results
 
-    # --- CRUD ---
     def insert(self):
+        """
+        Row data gateway insert for database.
+        """
         conn = get_connection()
         cursor = conn.cursor()
 
@@ -88,6 +124,9 @@ class EvalGateway:
         conn.close()
 
     def update(self):
+        """
+        Row data gateway update for database.
+        """
         conn = get_connection()
         cursor = conn.cursor()
 
@@ -112,6 +151,9 @@ class EvalGateway:
         conn.close()
 
     def delete(self):
+        """
+        Row data gateway delete for database.
+        """
         conn = get_connection()
         cursor = conn.cursor()
 

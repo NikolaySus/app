@@ -10,6 +10,9 @@ class EvalFinder:
     Finder class.
     """
     def find_eval(self, eval_id: int):
+        """
+        Search by id for UI select.
+        """
         conn = get_connection()
         cursor = conn.cursor()
 
@@ -22,7 +25,9 @@ class EvalFinder:
         return self._row_to_eval(row)
 
     def find_eval_by_name(self, eval_name: str):
-        """Prefix search for UI list."""
+        """
+        Prefix search for UI list.
+        """
         conn = get_connection()
         cursor = conn.cursor()
 

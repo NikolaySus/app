@@ -12,11 +12,14 @@ class CreateEvaluation:
     Control class.
     """
     def check_eval_name_input(self, eval_name: str):
+        """
+        Name validation.
+        """
         if not eval_name:
             raise ValueError("Evaluation name cannot be empty")
 
         if len(eval_name) < 3:
-            raise ValueError("Evaluation name must be at least 3 characters long")
+            raise ValueError("Evaluation name must be at least 3 characters")
 
         # Allow only safe, simple characters
         if not re.match(r"^[A-Za-z0-9_\- ]+$", eval_name):
@@ -30,6 +33,9 @@ class CreateEvaluation:
             raise ValueError("Evaluation name already exists")
 
     def create_eval(self, eval_name: str):
+        """
+        Evaluation creation.
+        """
         # Application-level validation
         self.check_eval_name_input(eval_name)
 
