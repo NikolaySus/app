@@ -210,7 +210,7 @@ class EvaluationUI(QWidget):
         """
         if not self.current_eval:
             return
-            self.polling_enabled = False  # Приостановка опроса во время операции
+        self.polling_enabled = False  # Приостановка опроса во время операции
         try:
             RunEvaluation.run_eval(self.current_eval)
         except AssertionError:
